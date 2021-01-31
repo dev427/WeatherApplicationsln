@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ob="clr-namespace:weatherapp.ViewModels"
+             BackgroundImageSource="capetown.png"
+             x:Class="weatherapp.Views.WeatherPage">
+    <ContentPage.BindingContext>
+        <ob:WeatherViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding WeatherList}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout  Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" BackgroundColor="Transparent" >
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding timezone}" FontSize="60" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#52524E"/>
+
+                            </Grid>
+
+                            <Frame BackgroundColor="Transparent" Padding="0,100,0,0">
+                                <Image Source="capetownbutton.png" Aspect="Fill" HeightRequest="150"/>
+
+                            </Frame>
+
+                            <Grid Grid.Row="1" BackgroundColor="Transparent" >
+                                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="today.png" Aspect="AspectFit" HeightRequest="100"/>
+                                <Image Grid.Row="1" Grid.Column="0" Source="{Binding current.weather[0].10d}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding current.temp, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding current.weather[0].main}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" BackgroundColor="Transparent" Padding="0,300,0,0">
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding current.wind_speed, StringFormat='{0:N0}km/h'}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header"/>
+                                <Image Grid.Row="1" Grid.Column="0" Source="wind.png" Aspect="AspectFit" HeightRequest="50"/>
+
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding current.humidity, StringFormat='{0:N0}%'}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header"/>
+                                <Image Grid.Row="1" Grid.Column="1" Source="humidity.png" Aspect="AspectFit" HeightRequest="50"/>
+
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding current.feels_like, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header"/>
+                                <Image Grid.Row="1" Grid.Column="2" Source="feelslike.png" Aspect="AspectFit" HeightRequest="50"/>
+                            </Grid>
+
+                            <Grid Grid.Row="3" BackgroundColor="Transparent">
+                                <Image Grid.Row="0" Grid.Column="0" Source="day1.png" Aspect="AspectFill" HeightRequest="70"/>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding daily[1].daily.dt, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Image Grid.Row="0" Grid.Column="1" Source="day2.png" Aspect="AspectFill" HeightRequest="70"/>
+                                <Image Grid.Row="1" Grid.Column="0" Source="{Binding daily[1].weather[0].id}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="2" Grid.Column="0" Text="{Binding daily[1].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                <Image Grid.Row="0" Grid.Column="2" Source="day3.png" Aspect="AspectFill" HeightRequest="70"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding daily[2].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Image Grid.Row="1" Grid.Column="1" Source="{Binding daily[2].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Image Grid.Row="0" Grid.Column="3" Source="day4.png" Aspect="AspectFill" HeightRequest="70"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding daily[2].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding daily[3].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Image Grid.Row="1" Grid.Column="2" Source="{Binding daily[3].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="2" Grid.Column="2" Text="{Binding daily[3].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                <Image Grid.Row="0" Grid.Column="4" Source="day5.png" Aspect="AspectFill" HeightRequest="70"/>
+                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding daily[4].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Image Grid.Row="1" Grid.Column="3" Source="{Binding daily[4].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="2" Grid.Column="3" Text="{Binding daily[4].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+
+                                <Label Grid.Row="0" Grid.Column="4" Text="{Binding daily[5].date_time, StringFormat='{0:M}'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Image Grid.Row="1" Grid.Column="4" Source="{Binding daily[5].weather[0].icon_url}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="2" Grid.Column="4" Text="{Binding daily[5].temp.day, StringFormat='{0:N0}°'}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20"/>
+                            </Grid>
+
+                        </Grid>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>
